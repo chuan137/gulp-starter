@@ -1,0 +1,26 @@
+{
+  "name": "gulp-example",
+  "version": "0.0.0",
+  "authors": [
+    "chuan <chuan137@gmail.com>"
+  ],
+  "description": "example of using bower and gulp",
+  "main": "index.html",
+  "keywords": [
+    "gulp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~1.9.1",
+    "bootstrap": "~3.3.0",
+    "backbone": "~1.1.2",
+    "underscore": "~1.7.0"
+  }
+}
