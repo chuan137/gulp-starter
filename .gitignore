@@ -1,0 +1,6 @@
+*.bak
+
+bower_components/
+node_modules/
+debug/
+public/
