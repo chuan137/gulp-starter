@@ -4,19 +4,43 @@ var gulp = require("gulp"),
     notify = require("gulp-notify"),
     bower = require("gulp-bower");
 
- var config = {
+var config = {
+	srcPath: './src',
+	buildPath: './debug',
  	sassPath: './src/sass',
  	bowerDir: './bower_components'
  };
 
-/* gulp tasks */
+/**** gulp tasks ***************************************************/
+// manage dependencies via bower
 gulp.task('bower', function() {
 	return bower()
 		.pipe(gulp.dest(config.bowerDir))
 });
 
-/* gulp watch */
-gulp.task('watch', function() {});
+// copy vendor files to lib
+gulp.task('vendor', ['bower'], function () {
+	return gulp.src([
+			config.bowerDir + '/bootstrap/dist/js/bootstrap.min.js',
+			config.bowerDir + '/bootstrap/dist/css/bootstrap.min.css',
+			config.bowerDir + '/jquery/jquery.min.js'
+		])
+		.pipe(gulp.dest(config.buildPath + '/lib'));
+});
 
-/* gulp default task */
-gulp.task('default', ['bower']);
+gulp.task('htmls', function() {
+	return gulp.src(config.srcPath + '/*.html')
+		.pipe(gulp.dest(config.buildPath));
+})
+
+/**** gulp watch ***************************************************/
+gulp.task('watch', function() {
+	gulp.watch('src/*.html', ['htmls']);
+	//gulp.watch('src/js/*.js', ['scripts']);
+	//gulp.watch('src/css/*.css', ['styles']);
+});
+
+/***** gulp main tasks *********************************************/
+gulp.task('build', ['htmls']);
+gulp.task('default', ['bower', 'vendor', 'build']);
+
