@@ -9,10 +9,10 @@ var gulp = require("gulp"),
 
 var config = {
 	srcPath: './src',
-	buildPath: './debug',
  	sassPath: './src/sass',
- 	bowerDir: './bower_components',
- 	appjs: '/js/index.js'
+ 	appjs: './src/js/index.js',
+	buildPath: './debug',
+ 	bowerDir: './bower_components'
  };
 
 /**** gulp tasks ***************************************************/
@@ -37,6 +37,11 @@ gulp.task('htmls', function() {
 		.pipe(gulp.dest(config.buildPath));
 });
 
+gulp.task('styles', function() {
+	return gulp.src(config.srcPath + '/css/*.css')
+		.pipe(gulp.dest(config.buildPath));
+});
+
 gulp.task('scripts', function() {
 	return gulp.src(config.srcPath + '/js/*.js')
 		.pipe(concat('bundle.js'))
@@ -44,7 +49,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('browserify', function() {
-	var bundler = browserify(config.srcPath + config.appjs).bundle();
+	var bundler = browserify(config.appjs).bundle();
 	return bundler
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest(config.buildPath));
@@ -53,11 +58,11 @@ gulp.task('browserify', function() {
 /**** gulp watch ***************************************************/
 gulp.task('watch', function() {
 	gulp.watch(config.srcPath + '/*.html', ['htmls']);
-	gulp.watch(config.srcPath + config.appjs, ['browserify']);
-	//gulp.watch('src/css/*.css', ['styles']);
+	gulp.watch(config.srcPath + '/css/*.css', ['styles']);
+	gulp.watch(config.appjs, ['browserify']);
 });
 
 /***** gulp main tasks *********************************************/
-gulp.task('build', ['htmls', 'browserify']);
+gulp.task('build', ['htmls', 'styles', 'browserify']);
 gulp.task('default', ['bower', 'vendor', 'build']);
 
