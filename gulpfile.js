@@ -5,7 +5,8 @@ var gulp = require("gulp"),
     notify = require("gulp-notify"),
     bower = require("gulp-bower"),
     browserify = require("browserify"),
-    source = require("vinyl-source-stream");
+    source = require("vinyl-source-stream"),
+    ractify = require("ractify");
 
 var config = {
 	srcPath: './src',
@@ -49,10 +50,14 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('browserify', function() {
-	var bundler = browserify(config.appjs).bundle();
-	return bundler
+    var bundler = browserify(config.appjs);
+    bundler.transform({ extension: 'html' }, ractify);
+
+	return bundler.bundle()
+        .on("error", notify.onError({ 
+            title: "Compile Error", message: "Error: <%= error.message %>" }))
 		.pipe(source('bundle.js'))
-		.pipe(gulp.dest(config.buildPath));
+		.pipe(gulp.dest(config.buildPath))
 });
 
 /**** gulp watch ***************************************************/
