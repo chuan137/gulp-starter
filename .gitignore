@@ -1,6 +1,7 @@
 *.bak
 
-bower_components/
-node_modules/
-debug/
-public/
+/bower_components/
+/node_modules/
+/debug/
+/public/
+/.project
