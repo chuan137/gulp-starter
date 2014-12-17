@@ -1,0 +1,16 @@
+<h2> Hallo {{world}} </h2>
+
+<style>
+  h2 {color: red}
+</style>
+
+<script>
+  component.export = {
+      oninit: function () {
+          console.log('haha');
+          setTimeout( function () {
+              throw new Error('This makes it way easier to track down errors');
+          }, 500 );
+      }
+  };
+</script>
