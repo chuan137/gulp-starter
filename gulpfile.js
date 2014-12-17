@@ -43,6 +43,11 @@ gulp.task('styles', function() {
 		.pipe(gulp.dest(config.buildPath));
 });
 
+gulp.task('images', function() {
+    return gulp.src(config.srcPath + '/images/*')
+        .pipe(gulp.dest(config.buildPath + '/images/'))
+});
+
 gulp.task('scripts', function() {
 	return gulp.src(config.srcPath + '/js/*.js')
 		.pipe(concat('bundle.js'))
@@ -64,10 +69,11 @@ gulp.task('browserify', function() {
 gulp.task('watch', function() {
 	gulp.watch(config.srcPath + '/*.html', ['htmls']);
 	gulp.watch(config.srcPath + '/css/*.css', ['styles']);
+	gulp.watch(config.srcPath + '/images/*', ['images']);
 	gulp.watch(config.appjs, ['browserify']);
 });
 
 /***** gulp main tasks *********************************************/
-gulp.task('build', ['htmls', 'styles', 'browserify']);
+gulp.task('build', ['htmls', 'styles', 'images', 'browserify']);
 gulp.task('default', ['bower', 'vendor', 'build']);
 
