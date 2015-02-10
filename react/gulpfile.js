@@ -19,6 +19,8 @@ gulp.task('global', function() {
     var outputName = 'global.js';
     var files = [
         'jquery',
+        'backbone',
+        'react',
         {file: 'backbone/node_modules/underscore', expose: 'underscore'}
     ];
 
@@ -34,7 +36,7 @@ gulp.task('app', function() {
     var entry = config.src + '/javascript/app.js';
     var dest = config.dest;
     var outputName = 'app.js';
-    var modules = ['jquery', 'underscore'];
+    var modules = ['jquery', 'backbone', 'underscore', 'react'];
 
     var b = browserify(entry)
             .external(modules)
@@ -65,7 +67,7 @@ gulp.task('images', function() {
     var src = config.src + '/images/**';
     var dest = config.dest + '/images';
     return gulp.src(src)
-        .pipe(debug({title: 'unicorn:'}))
+        // .pipe(debug({title: 'unicorn:'}))
         .pipe(gulp.dest(dest));
 });
 
@@ -73,13 +75,14 @@ gulp.task('vendor', function() {
     var src = ['./node_modules/bootstrap/dist/css/bootstrap.css'];
     var dest = config.dest + '/vendor';
     return gulp.src(src)
-        .pipe(debug({title: 'unicorn:'}))
+        // .pipe(debug({title: 'unicorn:'}))
         .pipe(gulp.dest(dest))
 });
 
 
 /**** gulp watch ***************************************************/
 gulp.task('watch', function() {
+    gulp.watch( './gulpfile.js', ['build']);
     gulp.watch( config.src + "/javascript/app.js", [ 'app' ]);
     gulp.watch( config.src + "/htdocs/**.html", [ 'htdocs' ]);
     gulp.watch( config.src + "/images/**", [ 'images' ]);
