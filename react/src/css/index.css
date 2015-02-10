@@ -1,0 +1,20 @@
+body {
+    background: #e5e5e5;
+}
+.navbar {
+    background: #f5f5f5;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.block {
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 6px;
+    background: white;
+    border: 1px solid #d8d8d8;
+    border-bottom-width: 2px;
+    font-size: 14px;
+}

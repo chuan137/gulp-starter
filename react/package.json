@@ -1,22 +1,35 @@
 {
+  "browser": {
+    "underscore": "./node_modules/backbone/node_modules/underscore",
+    "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js"
+  },
   "browserify": {
-  	"transform": [
-  		"debowerify"
-  	]
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "bootstrap": [
+      "jquery:$"
+    ]
   },
   "devDependencies": {
+    "backbone-react-component": "~0.7.0",
+    "backbone-relational": "~0.9.0",
+    "browserify": "~8.0.0",
+    "browserify-shim": "^3.8.2",
     "gulp": "~3.8.5",
-    "gulp-concat": "~2.4.2",
-    "gulp-autoprefixer": "~2.0.0",
-    "gulp-bower": "~0.0.7",
-    "gulp-notify": "~1.2.4",
-    "gulp-ruby-sass": "~0.7.0",
-    "browserify": "~7.0.0",
-    "debowerify": "~1.2.0",
-    "vinyl-source-stream": "~1.0.0",
-    "ractive": "~0.6.0",
-    "ractify": "~0.5.0"
+    "gulp-debug": "^2.0.0",
+    "gulp-rename": "~1.2.0",
+    "gulp-uglify": "~1.0.0",
+    "react": "~0.12.2",
+    "reactify": "~0.17.0",
+    "vinyl-buffer": "~1.0.0",
+    "vinyl-source-stream": "~1.0.0"
   },
   "dependencies": {
+    "backbone": "^1.1.2",
+    "bootstrap": "~3.1.0",
+    "jquery": "^2.1.3"
   }
 }
